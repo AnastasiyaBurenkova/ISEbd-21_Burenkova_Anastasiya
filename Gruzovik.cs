@@ -9,22 +9,22 @@ namespace WindowsFormsApplication18
 {
     public class Gruzovik : Car
     {
-        private bool frontSpoiler;
-        private bool backSpoiler;
-        private bool sideSpoiler;
+        private bool bamper;
+        private bool kuzov;
+        private bool kolesa;
         private Color dopColor;
         public Gruzovik(int maxSpeed, int maxCountPassenger, int maxCountСapacity, double weight, Color color,
-            bool frontSpoiler, bool backSpoiler, bool sideSpoiler, Color dopColor) :
+            bool bamper, bool kuzov, bool kolesa, Color dopColor) :
             base(maxSpeed, maxCountPassenger, maxCountСapacity, weight, color)
         {
-            this.frontSpoiler = frontSpoiler;
-            this.backSpoiler = backSpoiler;
-            this.sideSpoiler = sideSpoiler;
+            this.bamper = bamper;
+            this.kuzov = kuzov;
+            this.kolesa = kolesa;
             this.dopColor = dopColor;
         }
         protected override void drawLightCar(Graphics g)
         {
-            if (frontSpoiler)
+            if (bamper)
             {
                 Pen pen = new Pen(Color.Black);
                 g.DrawEllipse(pen, startPosX + 80, startPosY - 6, 20, 20);
@@ -49,7 +49,7 @@ namespace WindowsFormsApplication18
                 g.FillRectangle(spoiler, startPosX, startPosY - 5, 15, 15);
                 g.FillRectangle(spoiler, startPosX, startPosY + 40, 15, 15);
             }
-            if (sideSpoiler)
+            if (kolesa)
             {
                 Pen pen = new Pen(Color.Black);
                 g.DrawRectangle(pen, startPosX + 25, startPosY - 6, 39, 10);
@@ -60,7 +60,7 @@ namespace WindowsFormsApplication18
                 g.FillRectangle(spoiler, startPosX + 25, startPosY + 45, 40, 10);
             }
             base.drawLightCar(g);
-            if (backSpoiler)
+            if (kuzov)
             {
                 Brush spoiler = new SolidBrush(dopColor);
                 g.FillRectangle(spoiler, startPosX - 55, startPosY, 60, 50);
