@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -10,32 +11,22 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import java.awt.Font;
 
 public class Main {
 
 	private JFrame frame;
-	private JTextField textMaxSpeed;
-	private JTextField textCount—apacitys;
-	private JTextField textWeight;
-	private JTextField textCountPassengers;
+	Parking parking;
 
-	Color color;
-	Color colorGruz;
-	int maxSpeed;
-	int weight;
-	int countPassengers;
-	int count—apacitys;
-	boolean bamper;
-	boolean kuzov;
-	boolean kolesa;
-
-	private ITransport interTran;
 	private Frame btnColor;
-	private Frame btnSelectFigtherColor;
+	private Frame btnSelectGruzovikColor;
+	private JTextField numPlace;
 
 	/**
 	 * Launch the application.
@@ -57,15 +48,11 @@ public class Main {
 	 * Create the application.
 	 */
 	public Main() {
-		color = Color.GRAY;
-		colorGruz = Color.BLUE;
-		maxSpeed = 2000;
-		count—apacitys = 0;
-		weight = 30000;
-		countPassengers = 5;
-
+		parking = new Parking();
+	
 		initialize();
-
+	    
+	    
 	}
 
 	/**
@@ -73,170 +60,112 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 682, 434);
+		frame.setBounds(100, 100, 1191, 559);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
 
-		textMaxSpeed = new JTextField();
-		textMaxSpeed.setBounds(176, 227, 86, 20);
-		frame.getContentPane().add(textMaxSpeed);
-		textMaxSpeed.setColumns(10);
-
-		textCount—apacitys = new JTextField();
-		textCount—apacitys.setBounds(81, 261, 86, 20);
-		frame.getContentPane().add(textCount—apacitys);
-		textCount—apacitys.setColumns(10);
-
-		textWeight = new JTextField();
-		textWeight.setBounds(353, 227, 86, 20);
-		frame.getContentPane().add(textWeight);
-		textWeight.setColumns(10);
-
-		textCountPassengers = new JTextField();
-		textCountPassengers.setBounds(368, 261, 86, 20);
-		frame.getContentPane().add(textCountPassengers);
-		textCountPassengers.setColumns(10);
-
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 547, 195);
+		JPanel panel = new Panel(parking);
+		panel.setBounds(10, 11, 854, 499);
 		frame.getContentPane().add(panel);
+		
+		
 
-		JCheckBox checkBamper = new JCheckBox("¡‡ÏÔÂ" + "");
-		checkBamper.setBounds(548, 226, 97, 23);
-		frame.getContentPane().add(checkBamper);
-
-		JCheckBox checkKuzov = new JCheckBox(" ÛÁÓ‚");
-		checkKuzov.setBounds(548, 260, 97, 23);
-		frame.getContentPane().add(checkKuzov);
-
-		JCheckBox checkKolesa = new JCheckBox(" ÓÎÂÒ‡");
-		checkKolesa.setBounds(548, 292, 97, 23);
-		frame.getContentPane().add(checkKolesa);
-
-		JButton btnDrawPlane = new JButton("«‡‰‡Ú¸ Ï‡¯ËÌÛ");
-		btnDrawPlane.addActionListener(new ActionListener() {
+		JButton btnSetPlane = new JButton("–ü—Ä–∏–ø–∞—Ä–∫–æ–≤–∞—Ç—å –∞–≤—Ç–æ");
+		btnSetPlane.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnSetPlane.setBackground(Color.YELLOW);
+		btnSetPlane.setForeground(Color.RED);
+		btnSetPlane.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (checkFields()) {
-					interTran = new Car(maxSpeed, count—apacitys, countPassengers, weight, color);
-
-					Graphics gr = panel.getGraphics();
-					gr.clearRect(0, 0, panel.getWidth(), panel.getHeight());
-					interTran.draw(gr);
-
+				Color colorDialog = JColorChooser.showDialog(null, "–í—ã–±–µ—Ä–∏—Ç–µ –æ—Å–Ω–æ–≤–Ω–æ–π —Ü–≤–µ—Ç", null);
+				if (colorDialog != null) {
+					ITransport plane = new Car(1000, 100, 30, 30, colorDialog);
+					int place = parking.putPlaneInParking(plane);
+					panel.repaint();
+					JOptionPane.showMessageDialog(null, "–í–∞—à–µ –º–µ—Å—Ç–æ: " + place);
 				}
 
 			}
 		});
-		btnDrawPlane.setBounds(148, 319, 138, 37);
-		frame.getContentPane().add(btnDrawPlane);
+		btnSetPlane.setBounds(874, 11, 291, 39);
+		frame.getContentPane().add(btnSetPlane);
 
-		JButton btnDrawGruzovik = new JButton("«‡‰‡Ú¸ „ÛÁÓ‚ËÍ");
-		btnDrawGruzovik.addActionListener(new ActionListener() {
+		JButton btnSetGruzovik = new JButton("–ü—Ä–∏–ø–∞—Ä–∫–æ–≤–∞—Ç—å –≥—Ä—É–∑–æ–≤–∏–∫");
+		btnSetGruzovik.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnSetGruzovik.setForeground(Color.GRAY);
+		btnSetGruzovik.setBackground(Color.GREEN);
+		btnSetGruzovik.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (checkFields()) {
-					bamper = checkBamper.isSelected();
-					kuzov = checkKuzov.isSelected();
-					kolesa = checkKolesa.isSelected();
-					interTran = new Gruzovik(maxSpeed, count—apacitys, countPassengers, weight, color, bamper, kuzov,
-							kolesa, colorGruz);
-
-					Graphics gr = panel.getGraphics();
-					gr.clearRect(0, 0, panel.getWidth(), panel.getHeight());
-					interTran.draw(gr);
+				Color colorDialog1 = JColorChooser.showDialog(null, "–í—ã–±–µ—Ä–∏—Ç–µ –æ—Å–Ω–æ–≤–Ω–æ–π —Ü–≤–µ—Ç", null);
+				if (colorDialog1 != null) {
+					Color colorDialog = JColorChooser.showDialog(null, "–í—ã–±–µ—Ä–∏—Ç–µ –¥–æ–ø–æ–ª–∏—Ç–µ–ª—å–Ω—ã–π —Ü–≤–µ—Ç", null);
+					if (colorDialog != null) {
+						ITransport plane = new  Gruzovik(1000, 100, 30, 30, colorDialog1, true, true,true, colorDialog);
+						int place = parking.putPlaneInParking(plane);
+						panel.repaint();
+						JOptionPane.showMessageDialog(null, "–í–∞—à–µ –º–µ—Å—Ç–æ: " + place);
+					}
 				}
+
+				
 
 			}
 		});
-		btnDrawGruzovik.setBounds(494, 322, 162, 37);
-		frame.getContentPane().add(btnDrawGruzovik);
+		btnSetGruzovik.setBounds(874, 61, 291, 39);
+		frame.getContentPane().add(btnSetGruzovik);
 
-		JButton btnColor = new JButton("÷‚ÂÚ");
-		btnColor.setForeground(color);
-		btnColor.addActionListener(new ActionListener() {
+		JPanel panelTake = new JPanel();
+		panelTake.setForeground(Color.BLACK);
+		panelTake.setBackground(Color.WHITE);
+		panelTake.setBounds(874, 126, 291, 170);
+		frame.getContentPane().add(panelTake);
+
+		JButton btnTake = new JButton("–ó–∞–±—Ä–∞—Ç—å –º–∞—à–∏–Ω—É");
+		btnTake.setForeground(Color.BLUE);
+		btnTake.setBackground(Color.LIGHT_GRAY);
+		btnTake.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnTake.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				Color initialBackground = btnColor.getForeground();
-				Color foreground = JColorChooser.showDialog(null, "JColorChooser Sample", initialBackground);
-				if (foreground != null) {
-					btnColor.setForeground(foreground);
+				
+				if(checkPlace(numPlace.getText())) {
+					ITransport plane = parking.getPlaneInParking(Integer.parseInt(numPlace.getText()));
+					Graphics gr = panelTake.getGraphics();
+					gr.clearRect(0, 0, panelTake.getWidth(), panelTake.getHeight());
+					plane.setPosition(60, 5);
+					plane.draw(gr);
+					panel.repaint();
 				}
-				color = foreground;
+				
 			}
 		});
-		btnColor.setBounds(10, 292, 115, 23);
-		frame.getContentPane().add(btnColor);
+		btnTake.setBounds(1002, 382, 163, 62);
+		frame.getContentPane().add(btnTake);
 
-		JButton btnMove = new JButton("ƒ‚ËÊÂÌËÂ");
-		btnMove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (interTran != null) {
-					Graphics gr = panel.getGraphics();
-					gr.clearRect(0, 0, panel.getWidth(), panel.getHeight());
-					interTran.move(gr);
-				}
-			}
-		});
-		btnMove.setBounds(556, 88, 100, 23);
-		frame.getContentPane().add(btnMove);
-
-		JButton btnSelectFigtherColor = new JButton("ƒÓÔÓÎÌËÚÂÎ¸Ì˚È ˆ‚ÂÚ");
-		btnSelectFigtherColor.setForeground(colorGruz);
-		btnSelectFigtherColor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				Color initialBackground = btnSelectFigtherColor.getForeground();
-				Color foreground = JColorChooser.showDialog(null, "JColorChooser Sample", initialBackground);
-				if (foreground != null) {
-					btnSelectFigtherColor.setForeground(foreground);
-				}
-				colorGruz = foreground;
-			}
-		});
-		btnSelectFigtherColor.setBounds(318, 326, 166, 23);
-		frame.getContentPane().add(btnSelectFigtherColor);
-
-		JLabel lblNewLabel = new JLabel("Ã‡ÍÒËÏ‡Î¸Ì‡ˇ ÒÍÓÓÒÚ¸");
-		lblNewLabel.setBounds(6, 230, 181, 17);
+		JLabel lblNewLabel = new JLabel("–ú–µ—Å—Ç–æ:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setForeground(Color.MAGENTA);
+		lblNewLabel.setBounds(899, 336, 57, 33);
 		frame.getContentPane().add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("√ÛÁ");
-		lblNewLabel_1.setBounds(29, 264, 46, 14);
-		frame.getContentPane().add(lblNewLabel_1);
-
-		JLabel texteight = new JLabel("¬ÂÒ");
-		texteight.setBounds(290, 230, 46, 14);
-		frame.getContentPane().add(texteight);
-
-		JLabel lblNewLabel_3 = new JLabel("œ‡ÒÒ‡ÊË˚");
-		lblNewLabel_3.setBounds(290, 264, 111, 14);
-		frame.getContentPane().add(lblNewLabel_3);
-
+		numPlace = new JTextField();
+		numPlace.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		numPlace.setBounds(966, 336, 86, 28);
+		frame.getContentPane().add(numPlace);
+		numPlace.setColumns(10);
+		
 	}
-
-	private boolean checkParse(String str) {
+	
+	private boolean checkPlace(String str) {
 		try {
 			Integer.parseInt(str);
 		} catch (NumberFormatException e) {
 			return false;
 		}
 
+		if(Integer.parseInt(str)>20) return false;
 		return true;
 	}
 
-	private boolean checkFields() {
-		if (checkParse(textMaxSpeed.getText()))
-			maxSpeed = Integer.parseInt(textMaxSpeed.getText());
-		if (checkParse(textCount—apacitys.getText()))
-			count—apacitys = Integer.parseInt(textCount—apacitys.getText());
-		if (checkParse(textWeight.getText()))
-			weight = Integer.parseInt(textWeight.getText());
-		if (checkParse(textCountPassengers.getText()))
-			countPassengers = Integer.parseInt(textCountPassengers.getText());
-
-		System.out.println(maxSpeed + " " + count—apacitys + " " + weight + " " + countPassengers);
-
-		return true;
-	}
+	
 }
