@@ -55,6 +55,8 @@ namespace WindowsFormsApplication18
         {
             ColorBody = color;
         }
+
+        public abstract string getInfo();
     }
 
 }

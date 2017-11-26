@@ -98,6 +98,24 @@ namespace WindowsFormsApplication18
            // startPosX = rand.Next(10, 200);
           //  startPosY = rand.Next(10, 200);
         }
+
+        public Car(string info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 5  )
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                MaxCountPassengers= Convert.ToInt32(strs[1]);
+                MaxCountСapacitys= Convert.ToInt32(strs[2]);
+                Weight= Convert.ToInt32(strs[3]);
+                ColorBody = Color.FromName(strs[4]);
+            }
+            this.countPassengers = 0;
+            Random rand = new Random();
+            startPosX = rand.Next(10, 200);
+            startPosY = rand.Next(10, 200);
+        }
+
         public override void moveCar(Graphics g)
         {
             startPosX +=
@@ -148,5 +166,9 @@ namespace WindowsFormsApplication18
             g.DrawRectangle(pen, startPosX, startPosY + 10, 15, 30);
         }
         
+        public override string getInfo()
+        {
+            return MaxSpeed + ";"+MaxCountPassengers +";"+MaxCountСapacitys+";"+Weight+";"+ ColorBody.Name;
+        }
     }
 }

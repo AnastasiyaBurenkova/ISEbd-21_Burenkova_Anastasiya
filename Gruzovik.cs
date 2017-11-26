@@ -22,6 +22,27 @@ namespace WindowsFormsApplication18
             this.kolesa = kolesa;
             this.dopColor = dopColor;
         }
+
+        public Gruzovik(string info): base(info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 9)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                MaxCountPassengers = Convert.ToInt32(strs[1]);
+                MaxCountСapacitys = Convert.ToInt32(strs[2]);
+                Weight = Convert.ToInt32(strs[3]);
+                ColorBody = Color.FromName(strs[4]);
+                bamper=Convert.ToBoolean(strs[5]);
+                kuzov = Convert.ToBoolean(strs[6]);
+                kolesa = Convert.ToBoolean(strs[7]);
+                dopColor = Color.FromName(strs[8]);
+            }
+        }
+
+
+
+
         public void setDopColor(Color color)
         {
             dopColor = color;
@@ -72,6 +93,10 @@ namespace WindowsFormsApplication18
                 g.DrawRectangle(pen, startPosX - 55, startPosY, 60, 50);
             }
         }
-
+        public override string getInfo()
+        {
+            return MaxSpeed + ";" + MaxCountPassengers + ";" + MaxCountСapacitys + ";" + Weight + ";" + 
+                ColorBody.Name+";"+ bamper +";"+ kuzov +";"+ kolesa+";"+ dopColor.Name;
+        }
     }
 }
