@@ -32,6 +32,7 @@ public class Main {
 	JPanel panel;
 	private String[] elements = new String[6];
 	JList listLevels;
+	SelectPlane select;
 
 	/**
 	 * Launch the application.
@@ -57,76 +58,42 @@ public class Main {
 
 		initialize();
 		for (int i = 0; i < 5; i++) {
-			elements[i] = "Уровень " + (i+1);
+			elements[i] = "Уровень " + (i + 1);
 		}
 
 		listLevels.setSelectedIndex(parking.getCurrentLevel());
+
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+
+	public void getPlane() {
+		select = new SelectPlane(frame);
+		if (select.res()) {
+			ITransport plane = select.getPlane();
+			int place = parking.putPlaneInParking(plane);
+			panel.repaint();
+			System.out.println("Ваше место: " + place);
+		}
+	}
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1218, 559);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-			panel = new Panel(parking);
-			panel.setBounds(10, 11, 854, 499);
-			frame.getContentPane().add(panel);
-		
-
-		JButton btnSetPlane = new JButton("Припарковать авто");
-		btnSetPlane.setForeground(Color.RED);
-		btnSetPlane.setBackground(Color.PINK);
-		btnSetPlane.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSetPlane.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				Color colorDialog = JColorChooser.showDialog(null, "JColorChooser Sample", null);
-				if (colorDialog != null) {
-					ITransport plane = new Car(1000, 100, 30, 30, colorDialog);
-					int place = parking.putPlaneInParking(plane);
-					panel.repaint();
-					JOptionPane.showMessageDialog(null, "Ваше место: " + place);
-				}
-
-			}
-		});
-		btnSetPlane.setBounds(904, 171, 206, 34);
-		frame.getContentPane().add(btnSetPlane);
-
-		JButton btnSetFigther = new JButton("Припарковать грузовик");
-		btnSetFigther.setForeground(Color.CYAN);
-		btnSetFigther.setBackground(Color.YELLOW);
-		btnSetFigther.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSetFigther.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Color colorDialog1 = JColorChooser.showDialog(null, "JColorChooser Sample", null);
-				if (colorDialog1 != null) {
-					Color colorDialog = JColorChooser.showDialog(null, "JColorChooser Sample", null);
-					if (colorDialog != null) {
-						ITransport plane = new Gruzovik(1000, 100, 30, 30, colorDialog1, true, true, true,colorDialog);
-						int place = parking.putPlaneInParking(plane);
-						panel.repaint();
-						JOptionPane.showMessageDialog(null, "Ваше место: " + place);
-					}
-				}
-
-			}
-		});
-		btnSetFigther.setBounds(904, 219, 206, 34);
-		frame.getContentPane().add(btnSetFigther);
+		panel = new Panel(parking);
+		panel.setBounds(10, 11, 854, 499);
+		frame.getContentPane().add(panel);
 
 		JPanel panelTake = new JPanel();
-		panelTake.setBounds(889, 340, 291, 170);
+		panelTake.setBounds(874, 340, 318, 170);
 		frame.getContentPane().add(panelTake);
 
 		JButton btnTake = new JButton("Забрать машину");
-		btnTake.setForeground(Color.GREEN);
-		btnTake.setBackground(Color.ORANGE);
-		btnTake.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnTake.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -141,28 +108,24 @@ public class Main {
 
 			}
 		});
-		btnTake.setBounds(1032, 300, 160, 29);
+		btnTake.setBounds(1039, 298, 153, 31);
 		frame.getContentPane().add(btnTake);
 
-		JLabel lblNewLabel = new JLabel("Место:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(874, 276, 69, 17);
+		JLabel lblNewLabel = new JLabel("Место ");
+		lblNewLabel.setBounds(884, 270, 46, 14);
 		frame.getContentPane().add(lblNewLabel);
 
 		numPlace = new JTextField();
-		numPlace.setBounds(930, 273, 86, 20);
+		numPlace.setBounds(940, 267, 86, 20);
 		frame.getContentPane().add(numPlace);
 		numPlace.setColumns(10);
 
 		listLevels = new JList(elements);
-		listLevels.setForeground(Color.BLUE);
-		listLevels.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		listLevels.setBackground(Color.LIGHT_GRAY);
-		listLevels.setBounds(966, 11, 144, 135);
+		listLevels.setBounds(957, 11, 153, 111);
 		frame.getContentPane().add(listLevels);
 
 		JButton btnLevelDown = new JButton("<<");
-		btnLevelDown.setBackground(Color.MAGENTA);
+		btnLevelDown.setBackground(Color.PINK);
 		btnLevelDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parking.levelDown();
@@ -170,11 +133,11 @@ public class Main {
 				panel.repaint();
 			}
 		});
-		btnLevelDown.setBounds(869, 130, 89, 23);
+		btnLevelDown.setBounds(874, 133, 89, 23);
 		frame.getContentPane().add(btnLevelDown);
 
 		JButton btnLevelUp = new JButton(">>");
-		btnLevelUp.setBackground(Color.MAGENTA);
+		btnLevelUp.setBackground(Color.PINK);
 		btnLevelUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				parking.levelUp();
@@ -182,8 +145,21 @@ public class Main {
 				panel.repaint();
 			}
 		});
-		btnLevelUp.setBounds(1113, 130, 89, 23);
+		btnLevelUp.setBounds(1103, 133, 89, 23);
 		frame.getContentPane().add(btnLevelUp);
+
+		JButton btnGetPlane = new JButton("Припарковать авто");
+		btnGetPlane.setForeground(Color.RED);
+		btnGetPlane.setBackground(Color.ORANGE);
+		btnGetPlane.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnGetPlane.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				getPlane();
+			}
+		});
+		btnGetPlane.setBounds(874, 181, 318, 51);
+		frame.getContentPane().add(btnGetPlane);
 
 	}
 

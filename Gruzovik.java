@@ -70,4 +70,7 @@ public class Gruzovik extends Car {
 		}
 
 	}
+	public void setColorGruz(Color f) {
+		colorGruz = f;
+	}
 }
