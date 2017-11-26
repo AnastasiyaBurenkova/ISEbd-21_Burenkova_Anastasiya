@@ -57,6 +57,7 @@
             this.pictureBoxDraw.Size = new System.Drawing.Size(539, 301);
             this.pictureBoxDraw.TabIndex = 0;
             this.pictureBoxDraw.TabStop = false;
+
             // 
             // buttonSelectColor
             // 

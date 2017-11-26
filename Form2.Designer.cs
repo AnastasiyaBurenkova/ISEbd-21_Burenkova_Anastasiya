@@ -62,7 +62,7 @@
             this.buttonSetCar.TabIndex = 1;
             this.buttonSetCar.Text = "Припарковать авто";
             this.buttonSetCar.UseVisualStyleBackColor = true;
-            this.buttonSetCar.Click += new System.EventHandler(this.buttonSetCar_Click_1);
+            this.buttonSetCar.Click += new System.EventHandler(this.buttonSetCar_Click);
             // 
             // buttonSetGru
             // 
@@ -84,7 +84,7 @@
             this.buttonTakeCar.TabIndex = 3;
             this.buttonTakeCar.Text = "Забрать";
             this.buttonTakeCar.UseVisualStyleBackColor = true;
-            this.buttonTakeCar.Click += new System.EventHandler(this.buttonTakeCar_Click_1);
+            this.buttonTakeCar.Click += new System.EventHandler(this.buttonTakeCar_Click);
             // 
             // label1
             // 
@@ -148,7 +148,7 @@
             this.buttonDown.TabIndex = 10;
             this.buttonDown.Text = "<<";
             this.buttonDown.UseVisualStyleBackColor = true;
-            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click_1);
+            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
             // 
             // buttonUp
             // 
@@ -158,7 +158,7 @@
             this.buttonUp.TabIndex = 11;
             this.buttonUp.Text = ">>";
             this.buttonUp.UseVisualStyleBackColor = true;
-            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click_1);
+            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
             // 
             // Form2
             // 
@@ -180,6 +180,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form2";
             this.Text = "Form2";
+           
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeCar)).EndInit();
             this.ResumeLayout(false);

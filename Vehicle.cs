@@ -51,6 +51,10 @@ namespace WindowsFormsApplication18
             countСapacitys = 0;
             return count;
         }
+        public virtual void setMainColor(Color color)
+        {
+            ColorBody = color;
+        }
     }
 
 }

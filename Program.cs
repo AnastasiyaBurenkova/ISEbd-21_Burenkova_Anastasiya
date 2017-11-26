@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication18
 {
+    public delegate void myDel(WindowsFormsApplication18.ITransport car);
     static class Program
     {
         /// <summary>
