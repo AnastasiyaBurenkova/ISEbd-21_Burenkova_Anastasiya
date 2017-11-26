@@ -180,10 +180,7 @@ namespace WindowsFormsApplication18
             Close();
         }
 
-        private void labelDopColor_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
+        
 
         /// <summary>
         /// Добавление машины

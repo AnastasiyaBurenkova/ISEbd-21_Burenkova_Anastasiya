@@ -21,5 +21,6 @@ namespace WindowsFormsApplication18
         int getPassenger();
         int getСapacity();
         void setMainColor(Color color);
+        string getInfo();
     }
 }
