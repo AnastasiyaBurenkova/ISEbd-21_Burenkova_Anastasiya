@@ -94,9 +94,7 @@ namespace WindowsFormsApplication18
             this.Weight = weight;
             this.countPassengers = 0;
             this.countСapacitys = 0;
-           // Random rand = new Random();
-           // startPosX = rand.Next(10, 200);
-          //  startPosY = rand.Next(10, 200);
+       
         }
         public override void moveCar(Graphics g)
         {
