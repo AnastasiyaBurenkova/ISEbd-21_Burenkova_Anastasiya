@@ -257,6 +257,7 @@
             this.Controls.Add(this.labelCar);
             this.Name = "FormSelectCar";
             this.Text = "FormSelectCar";
+            this.Load += new System.EventHandler(this.FormSelectCar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCar)).EndInit();
             this.panelCar.ResumeLayout(false);
             this.panelColor.ResumeLayout(false);

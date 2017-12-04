@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,10 +21,12 @@ namespace WindowsFormsApplication18
         /// Форма для добавления
         /// </summary>
         FormSelectCar form;
+        private Logger log;
 
         public Form2()
         {
             InitializeComponent();
+            log = LogManager.GetCurrentClassLogger();
             parking = new Parking(5);
             //заполнение listBox
             for (int i = 1; i < 6; i++)
@@ -55,6 +58,7 @@ namespace WindowsFormsApplication18
         {
             parking.LevelDown();
             listBoxLevels.SelectedIndex = parking.getCurrentLevel;
+            log.Info("Переход на уровень ниже. Текущий уровень:" + parking.getCurrentLevel);
             Draw();
         }
         /// <summary>
@@ -78,6 +82,7 @@ namespace WindowsFormsApplication18
             form = new FormSelectCar();
             form.AddEvent(AddCar);
             form.Show();
+            log.Info("Вызываем панель для выбора цвета и авто");
         }
         /// <summary>
         /// Метод добавления машины
@@ -87,15 +92,23 @@ namespace WindowsFormsApplication18
         {
             if (car != null)
             {
-                int place = parking.PutCarInParking(car);
-                if (place > -1)
+                try
                 {
+                    int place = parking.PutCarInParking(car);
                     Draw();
                     MessageBox.Show("Ваше место: " + place);
+                    log.Info("Припарковано авто на место " + place);
                 }
-                else
+               catch (ParkingOverflowException ex)
+               
                 {
-                    MessageBox.Show("Машину не удалось поставить");
+                    MessageBox.Show(ex.Message, "Ошибка переполнения",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Общая ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -116,6 +129,7 @@ namespace WindowsFormsApplication18
                     int place = parking.PutCarInParking(car);
                     Draw();
                     MessageBox.Show("Ваше место: " + place);
+                    log.Info("Припарковано грузовик на место " + place);
                 }
             }
         }
@@ -131,19 +145,28 @@ namespace WindowsFormsApplication18
                 string level = listBoxLevels.Items[listBoxLevels.SelectedIndex].ToString();
                 if (maskedTextBox1.Text != "")
                 {
-                    ITransport car = parking.GetCarInParking(Convert.ToInt32(maskedTextBox1.Text));
-                    if (car != null)
-                    {//если удалось забрать, то отрисовываем
+                    try
+                    {
+                        ITransport car = parking.GetCarInParking(Convert.ToInt32(maskedTextBox1.Text));
                         Bitmap bmp = new Bitmap(pictureBoxTakeCar.Width, pictureBoxTakeCar.Height);
                         Graphics gr = Graphics.FromImage(bmp);
-                        car.setPosition(5, 5);
+                        car.setPosition(50, 5);
                         car.drawCar(gr);
                         pictureBoxTakeCar.Image = bmp;
                         Draw();
+                        log.Info("Забрали авто");
+
                     }
-                    else
-                    {//иначе сообщаем об этом
-                        MessageBox.Show("Извинте, на этом месте нет машины");
+                    
+                    catch (ParkingIndexOutOfRangeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Неверный номер",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Общая ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -183,5 +206,7 @@ namespace WindowsFormsApplication18
                 Draw();
             }
         }
+
+        
     }
 }

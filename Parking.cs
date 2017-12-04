@@ -13,7 +13,7 @@ namespace WindowsFormsApplication18
         ClassArray<ITransport> parking;
         List <ClassArray<ITransport>> parkingStages;
         int countPlaces = 20;
-        int placeSizeWidth = 350;
+        int placeSizeWidth = 250;
         int placeSizeHeight = 80;
         int currentLevel;
         public int getCurrentLevel { get { return currentLevel; } }

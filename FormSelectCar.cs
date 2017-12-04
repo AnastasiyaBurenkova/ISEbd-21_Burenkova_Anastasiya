@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,7 @@ namespace WindowsFormsApplication18
         /// <summary>
         /// Отрисовать машину
         /// </summary>
+        private Logger log;
         private void DrawCar()
         {
             if (car != null)
@@ -79,6 +81,7 @@ namespace WindowsFormsApplication18
         {
             labelCar.DoDragDrop(labelCar.Text,
             DragDropEffects.Move | DragDropEffects.Copy);
+           
         }
         /// <summary>
         /// Готовимся к перетаскиванию
@@ -112,12 +115,15 @@ namespace WindowsFormsApplication18
             {//случаным образом выбриаем какая машина встанет
                 case "Car":
                     car = new Car(100, 4, 3, 500, Color.Black);
+                    
                     break;
                 case "Gruzovik":
                     car = new Gruzovik(100, 4, 3, 500, Color.Black, true, true, true, Color.Black);
+                  
                     break;
             }
             DrawCar();
+            
         }
         /// <summary>
         /// Перетаскиваем цвет с панели
@@ -176,17 +182,15 @@ namespace WindowsFormsApplication18
             if (eventAddCar != null)
             {
                 eventAddCar(car);
+
             }
             Close();
         }
 
-        
+        private void FormSelectCar_Load(object sender, EventArgs e)
+        {
 
-        /// <summary>
-        /// Добавление машины
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        }
 
     }
 }
