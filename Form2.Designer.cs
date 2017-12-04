@@ -30,7 +30,6 @@
         {
             this.pictureBoxParking = new System.Windows.Forms.PictureBox();
             this.buttonSetCar = new System.Windows.Forms.Button();
-            this.buttonSetGru = new System.Windows.Forms.Button();
             this.buttonTakeCar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
@@ -56,13 +55,13 @@
             this.pictureBoxParking.Location = new System.Drawing.Point(2, 30);
             this.pictureBoxParking.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxParking.Name = "pictureBoxParking";
-            this.pictureBoxParking.Size = new System.Drawing.Size(659, 376);
+            this.pictureBoxParking.Size = new System.Drawing.Size(948, 444);
             this.pictureBoxParking.TabIndex = 0;
             this.pictureBoxParking.TabStop = false;
             // 
             // buttonSetCar
             // 
-            this.buttonSetCar.Location = new System.Drawing.Point(665, 160);
+            this.buttonSetCar.Location = new System.Drawing.Point(1046, 186);
             this.buttonSetCar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSetCar.Name = "buttonSetCar";
             this.buttonSetCar.Size = new System.Drawing.Size(138, 41);
@@ -71,20 +70,9 @@
             this.buttonSetCar.UseVisualStyleBackColor = true;
             this.buttonSetCar.Click += new System.EventHandler(this.buttonSetCar_Click);
             // 
-            // buttonSetGru
-            // 
-            this.buttonSetGru.Location = new System.Drawing.Point(794, 205);
-            this.buttonSetGru.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonSetGru.Name = "buttonSetGru";
-            this.buttonSetGru.Size = new System.Drawing.Size(138, 40);
-            this.buttonSetGru.TabIndex = 2;
-            this.buttonSetGru.Text = "Припарковать грузовик";
-            this.buttonSetGru.UseVisualStyleBackColor = true;
-            this.buttonSetGru.Click += new System.EventHandler(this.buttonSetGru_Click);
-            // 
             // buttonTakeCar
             // 
-            this.buttonTakeCar.Location = new System.Drawing.Point(681, 307);
+            this.buttonTakeCar.Location = new System.Drawing.Point(1091, 322);
             this.buttonTakeCar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonTakeCar.Name = "buttonTakeCar";
             this.buttonTakeCar.Size = new System.Drawing.Size(94, 31);
@@ -96,7 +84,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(678, 244);
+            this.label1.Location = new System.Drawing.Point(987, 273);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 13);
@@ -105,7 +93,7 @@
             // 
             // maskedTextBox1
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(721, 276);
+            this.maskedTextBox1.Location = new System.Drawing.Point(1034, 298);
             this.maskedTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.maskedTextBox1.Mask = "00";
             this.maskedTextBox1.Name = "maskedTextBox1";
@@ -115,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(678, 283);
+            this.label2.Location = new System.Drawing.Point(977, 301);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
@@ -124,7 +112,7 @@
             // 
             // pictureBoxTakeCar
             // 
-            this.pictureBoxTakeCar.Location = new System.Drawing.Point(704, 343);
+            this.pictureBoxTakeCar.Location = new System.Drawing.Point(955, 358);
             this.pictureBoxTakeCar.Name = "pictureBoxTakeCar";
             this.pictureBoxTakeCar.Size = new System.Drawing.Size(241, 115);
             this.pictureBoxTakeCar.TabIndex = 7;
@@ -133,7 +121,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(681, 13);
+            this.label3.Location = new System.Drawing.Point(1005, 28);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 8;
@@ -142,14 +130,14 @@
             // listBoxLevels
             // 
             this.listBoxLevels.FormattingEnabled = true;
-            this.listBoxLevels.Location = new System.Drawing.Point(667, 30);
+            this.listBoxLevels.Location = new System.Drawing.Point(1034, 44);
             this.listBoxLevels.Name = "listBoxLevels";
             this.listBoxLevels.Size = new System.Drawing.Size(130, 108);
             this.listBoxLevels.TabIndex = 9;
             // 
             // buttonDown
             // 
-            this.buttonDown.Location = new System.Drawing.Point(803, 115);
+            this.buttonDown.Location = new System.Drawing.Point(1019, 158);
             this.buttonDown.Name = "buttonDown";
             this.buttonDown.Size = new System.Drawing.Size(75, 23);
             this.buttonDown.TabIndex = 10;
@@ -159,7 +147,7 @@
             // 
             // buttonUp
             // 
-            this.buttonUp.Location = new System.Drawing.Point(857, 86);
+            this.buttonUp.Location = new System.Drawing.Point(1109, 158);
             this.buttonUp.Name = "buttonUp";
             this.buttonUp.Size = new System.Drawing.Size(75, 23);
             this.buttonUp.TabIndex = 11;
@@ -173,7 +161,7 @@
             this.файлToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(943, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1196, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -189,14 +177,14 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // загрузитьToolStripMenuItem
             // 
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.загрузитьToolStripMenuItem.Text = "Загрузить";
             this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
             // 
@@ -213,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 456);
+            this.ClientSize = new System.Drawing.Size(1196, 485);
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.listBoxLevels);
@@ -224,7 +212,6 @@
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonTakeCar);
-            this.Controls.Add(this.buttonSetGru);
             this.Controls.Add(this.buttonSetCar);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -244,7 +231,6 @@
 
         private System.Windows.Forms.PictureBox pictureBoxParking;
         private System.Windows.Forms.Button buttonSetCar;
-        private System.Windows.Forms.Button buttonSetGru;
         private System.Windows.Forms.Button buttonTakeCar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
