@@ -10,7 +10,6 @@ namespace WindowsFormsApplication18
     {
         private Dictionary<int, T> places;
         private int maxCount;
-        //private T[] places;
         private T defaultValue;
         public ClassArray(int size, T defVal)
         {
@@ -18,14 +17,6 @@ namespace WindowsFormsApplication18
             places = new Dictionary<int, T>();
             maxCount = size;
         }
-       // public T getObject(int ind)
-        //{
-           // if (ind > -1 && ind< places.Length)
-           // {
-           //     return places[ind];
-            //}
-           // return defaultValue;
-        //}
         public static int operator +(ClassArray<T> p, T car)
         {
             if(p.places.Count ==p.maxCount)
