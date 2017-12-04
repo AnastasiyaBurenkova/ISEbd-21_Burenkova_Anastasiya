@@ -3,7 +3,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Parking {
-	// ClassArray<ITransport> parking;
 	ArrayList<ClassArray<ITransport>> parking;
 
 	int countPlaces = 20;
@@ -11,7 +10,6 @@ public class Parking {
 	int placeHeight = 80;
 	int currentLevel;
 	public Parking(int countStages) {
-		// parking = new ClassArray<ITransport>(countPlaces, null);
 		parking = new ArrayList<ClassArray<ITransport>>(countStages);
 		for (int i = 0; i < countStages; i++) {
 			parking.add(new ClassArray<ITransport>(countPlaces, null));
