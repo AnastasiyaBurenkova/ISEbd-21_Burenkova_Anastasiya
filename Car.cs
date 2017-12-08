@@ -18,7 +18,7 @@ namespace WindowsFormsApplication18
 
             protected set
             {
-                if (value > 0 && value < 300)
+                if (value > 0 && value < 200)
                 {
                     base.MaxSpeed = value;
                 }
@@ -81,7 +81,7 @@ namespace WindowsFormsApplication18
                 }
                 else
                 {
-                    base.Weight = 1000;
+                    base.Weight = 2000;
                 }
             }
         }
@@ -94,9 +94,7 @@ namespace WindowsFormsApplication18
             this.Weight = weight;
             this.countPassengers = 0;
             this.countСapacitys = 0;
-            Random rand = new Random();
-            startPosX = rand.Next(10, 200);
-            startPosY = rand.Next(10, 200);
+       
         }
         public override void moveCar(Graphics g)
         {
@@ -131,7 +129,7 @@ namespace WindowsFormsApplication18
             g.FillEllipse(brYellow, startPosX + 70, startPosY + 30, 20, 20);
             //кузов
             Brush br = new SolidBrush(ColorBody);
-            g.FillRectangle(br, startPosX - 50, startPosY + 10, 60, 30);
+            g.FillRectangle(br, startPosX , startPosY + 10, 10, 30);
             g.FillRectangle(br, startPosX + 80, startPosY + 10, 10, 30);
             g.FillRectangle(br, startPosX + 10, startPosY, 70, 50);
 
