@@ -22,6 +22,10 @@ namespace WindowsFormsApplication18
             this.kolesa = kolesa;
             this.dopColor = dopColor;
         }
+        public void setDopColor(Color color)
+        {
+            dopColor = color;
+        }
         protected override void drawLightCar(Graphics g)
         {
             if (bamper)

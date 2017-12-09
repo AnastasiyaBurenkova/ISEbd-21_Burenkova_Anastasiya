@@ -11,9 +11,15 @@ using System.Windows.Forms;
 namespace WindowsFormsApplication18
 {
     public partial class Form2 : Form
-
     {
+        /// <summary>
+        /// Парковка
+        /// </summary>
         Parking parking;
+        /// <summary>
+        /// Форма для добавления
+        /// </summary>
+        FormSelectCar form;
 
         public Form2()
         {
@@ -40,41 +46,64 @@ namespace WindowsFormsApplication18
                 pictureBoxParking.Image = bmp;
             }
         }
-        
-      
         /// <summary>
-        /// Забираем машину
+        /// Перемещаемся на следующий уровень парковки
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
-
-        private void buttonDown_Click_1(object sender, EventArgs e)
+        private void buttonDown_Click(object sender, EventArgs e)
         {
             parking.LevelDown();
             listBoxLevels.SelectedIndex = parking.getCurrentLevel;
             Draw();
         }
-
-        private void buttonUp_Click_1(object sender, EventArgs e)
+        /// <summary>
+        /// Перемещаемся на нижний уровень парковки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonUp_Click(object sender, EventArgs e)
         {
             parking.LevelUp();
             listBoxLevels.SelectedIndex = parking.getCurrentLevel;
             Draw();
         }
-
-        private void buttonSetCar_Click_1(object sender, EventArgs e)
+        /// <summary>
+        /// Вызываем форму добавления машины
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSetCar_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            form = new FormSelectCar();
+            form.AddEvent(AddCar);
+            form.Show();
+        }
+        /// <summary>
+        /// Метод добавления машины
+        /// </summary>
+        /// <param name="car"></param>
+        private void AddCar(ITransport car)
+        {
+            if (car != null)
             {
-                var car = new Car(100, 4, 1000, 13, dialog.Color);
                 int place = parking.PutCarInParking(car);
-                Draw();
-                MessageBox.Show("Ваше место: " + place);
+                if (place > -1)
+                {
+                    Draw();
+                    MessageBox.Show("Ваше место: " + place);
+                }
+                else
+                {
+                    MessageBox.Show("Машину не удалось поставить");
+                }
             }
         }
-
+        /// <summary>
+        /// Ставим гоночную машину
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSetGru_Click(object sender, EventArgs e)
         {
             ColorDialog dialog = new ColorDialog();
@@ -83,15 +112,19 @@ namespace WindowsFormsApplication18
                 ColorDialog dialogDop = new ColorDialog();
                 if (dialogDop.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    var car = new Gruzovik(100, 4, 1000, 13, dialog.Color, true, true, true, dialogDop.Color);
+                    var car = new Gruzovik(100, 4, 1000,7, dialog.Color, true, true, true, dialogDop.Color);
                     int place = parking.PutCarInParking(car);
                     Draw();
                     MessageBox.Show("Ваше место: " + place);
                 }
             }
         }
-
-        private void buttonTakeCar_Click_1(object sender, EventArgs e)
+        /// <summary>
+        /// Забираем машину
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonTakeCar_Click(object sender, EventArgs e)
         {
             if (listBoxLevels.SelectedIndex > -1)
             {//Прежде чем забрать машину, надо выбрать с какого уровня будем забирать
@@ -103,7 +136,7 @@ namespace WindowsFormsApplication18
                     {//если удалось забрать, то отрисовываем
                         Bitmap bmp = new Bitmap(pictureBoxTakeCar.Width, pictureBoxTakeCar.Height);
                         Graphics gr = Graphics.FromImage(bmp);
-                        car.setPosition(5, 50);
+                        car.setPosition(5, 5);
                         car.drawCar(gr);
                         pictureBoxTakeCar.Image = bmp;
                         Draw();
@@ -114,9 +147,6 @@ namespace WindowsFormsApplication18
                     }
                 }
             }
-        
         }
-
-    
-}
+    }
 }

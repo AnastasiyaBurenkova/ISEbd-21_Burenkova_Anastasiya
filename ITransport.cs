@@ -20,5 +20,6 @@ namespace WindowsFormsApplication18
         void loadСapacity(int count);
         int getPassenger();
         int getСapacity();
+        void setMainColor(Color color);
     }
 }

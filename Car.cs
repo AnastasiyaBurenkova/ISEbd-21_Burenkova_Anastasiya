@@ -147,5 +147,6 @@ namespace WindowsFormsApplication18
             g.DrawRectangle(pen, startPosX + 65, startPosY + 10, 25, 30);
             g.DrawRectangle(pen, startPosX, startPosY + 10, 15, 30);
         }
+        
     }
 }
