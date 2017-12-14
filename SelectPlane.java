@@ -320,7 +320,7 @@ public class SelectPlane extends JDialog {
 		}
 	}
 
-	public Color selectColor(String s) {
+	public static Color selectColor(String s) {
 		switch (s) {
 		case "yellow":
 			return Color.yellow;

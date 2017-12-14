@@ -16,4 +16,5 @@ public interface ITransport {
 
 	int get—apacity();
 	void setMainColor(Color color);
+	String getInfo();
 }

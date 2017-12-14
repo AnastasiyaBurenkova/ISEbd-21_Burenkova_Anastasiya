@@ -1,17 +1,29 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Parking {
-	// ClassArray<ITransport> parking;
+import javax.print.DocFlavor.BYTE_ARRAY;
+
+public class Parking implements Serializable {
+
 	ArrayList<ClassArray<ITransport>> parking;
 
 	int countPlaces = 20;
 	int placeWidth = 210;
 	int placeHeight = 80;
 	int currentLevel;
+
 	public Parking(int countStages) {
-		// parking = new ClassArray<ITransport>(countPlaces, null);
 		parking = new ArrayList<ClassArray<ITransport>>(countStages);
 		for (int i = 0; i < countStages; i++) {
 			parking.add(new ClassArray<ITransport>(countPlaces, null));
@@ -35,11 +47,9 @@ public class Parking {
 	public int putPlaneInParking(ITransport plane) {
 		return parking.get(currentLevel).plus(parking.get(currentLevel), plane);
 	}
-	
 
 	public ITransport getPlaneInParking(int index) {
 		return parking.get(currentLevel).minus(parking.get(currentLevel), index);
-	
 	}
 
 	public void draw(Graphics g, int width, int height) {
@@ -47,7 +57,7 @@ public class Parking {
 		for (int i = 0; i < countPlaces; i++) {
 			ITransport plane = parking.get(currentLevel).getPlane(i);
 			if (plane != null) {
-				plane.setPosition(5 + i / 5 * placeWidth + 55, i % 5 * placeHeight + 15);
+				plane.setPosition(5 + i / 5 * placeWidth + 65, i % 5 * placeHeight + 15);
 				plane.draw(g);
 			}
 		}
@@ -64,6 +74,40 @@ public class Parking {
 			g.drawLine(i * placeWidth, 0, i * placeWidth, 400);
 		}
 
+	}
+
+	public boolean save(String fileName) throws IOException {
+
+		FileOutputStream save = null;
+		try {
+			save = new FileOutputStream(fileName);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ObjectOutputStream obSave = new ObjectOutputStream(save);
+		System.out.println(parking.get(0).getPlane(0).getInfo());
+		obSave.writeObject(parking);
+
+		return true;
+	}
+
+	public boolean load(String filename) {
+		try {
+			ObjectInputStream obLoad = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
+			try {
+				parking = (ArrayList<ClassArray<ITransport>>)obLoad.readObject();
+				System.out.println(parking.get(0).getPlane(0).getInfo());
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 
 }

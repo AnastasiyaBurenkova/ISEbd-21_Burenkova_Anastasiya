@@ -1,13 +1,17 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Car extends Vehicle {
+public class Car extends Vehicle implements Serializable { 
 
 	public Car(int maxSpeed, int countСapacitys, int countPassengers, int weight, Color colorCar) {
 		this.maxSpeed = maxSpeed;
 		this.countСapacitys = countСapacitys;
 		this.weight = weight;
-		this.color = colorCar;
+		this.colorBody = colorCar;
 		this.countPassengers = countPassengers;
 
 		startX = 60;
@@ -86,9 +90,9 @@ public class Car extends Vehicle {
 		// TODO Auto-generated method stub
 		drawCarPlane(g);
 	}
-
+	
 	protected void drawCarPlane(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(colorBody);
 		g.drawOval(startX, startY, 20, 20);
 		g.drawOval(startX, startY + 30, 20, 20);
 		g.drawOval(startX + 70, startY, 20, 20);
@@ -108,7 +112,7 @@ public class Car extends Vehicle {
 		g.fillOval(startX + 70, startY + 30, 20, 20);
 
 		// кузов
-		g.setColor(color);
+		g.setColor(colorBody);
 		g.fillRect(startX - 50, startY + 10, 60, 30);
 		g.fillRect(startX + 80, startY + 10, 10, 30);
 		g.fillRect(startX + 10, startY, 70, 50);
@@ -127,6 +131,29 @@ public class Car extends Vehicle {
 		g.drawRect(startX, startY + 10, 15, 30);
 
 	}
+	@Override
+		public String getInfo() {
+			// TODO Auto-generated method stub
+			return maxSpeed + ";" + countСapacitys + ";" + weight + ";" + countPassengers + ";" + colorBody;
+	
+		}
+		
+		private void writeObject(ObjectOutputStream s) throws IOException {
+	        s.defaultWriteObject();
+	        s.writeInt(colorBody.getRed());
+	        s.writeInt(colorBody.getGreen());
+	        s.writeInt(colorBody.getBlue());
+	    }
+	
+	    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+	        s.defaultReadObject();
+	        int red = s.readInt();
+	        int green = s.readInt();
+	        int blue = s.readInt();
+	        colorBody = new Color(red, green, blue);
+	    }
+	
+	 
 
 	@Override
 	public void loadPassenger(int count) {

@@ -1,21 +1,25 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Gruzovik extends Car {
+public class Gruzovik extends Car implements Serializable {
 
 	private boolean bamper;
 	private boolean kuzov;
 	private boolean kolesa;
 
-	private Color colorGruz;
+	transient private Color colorGruz;
 
 	public Gruzovik(int maxSpeed, int count—apacitys, int countPassengers, int weight, Color colorCar, boolean bamper,
 			boolean kuzov, boolean kolesa, Color colorGruz) {
 		super(maxSpeed, count—apacitys, countPassengers, weight, colorCar);
 		// TODO Auto-generated constructor stub
 		this.bamper = bamper;
-		this.kuzov = kuzov;
+		this.kuzov = bamper;
 		this.kolesa = kolesa;
 		this.colorGruz = colorGruz;
 
@@ -72,5 +76,32 @@ public class Gruzovik extends Car {
 	}
 	public void setColorGruz(Color f) {
 		colorGruz = f;
+	}
+	private void writeObject(ObjectOutputStream s) throws IOException {
+		s.defaultWriteObject();
+		s.writeInt(colorBody.getRed());
+		s.writeInt(colorBody.getGreen());
+		s.writeInt(colorBody.getBlue());
+		s.writeInt(colorGruz.getRed());
+		s.writeInt(colorGruz.getGreen());
+		s.writeInt(colorGruz.getBlue());
+	}
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+		 s.defaultReadObject();
+		 int red = s.readInt();
+		 int green = s.readInt();
+		 int blue = s.readInt();
+		 colorBody = new Color(red, green, blue);
+		 int red1 = s.readInt();
+		 int green1 = s.readInt();
+		 int blue1 = s.readInt();
+		 colorGruz = new Color(red1, green1, blue1);
+	}
+	public String getInfo() {
+		// TODO Auto-generated method stub
+
+		return maxSpeed + ";" + count—apacitys + ";" + weight + ";" + colorBody + ";" + countPassengers + ";" + bamper + ";" + bamper+ ";"
+				+ kolesa+ ";" +colorGruz;
+
 	}
 }
