@@ -53,14 +53,14 @@ namespace WindowsFormsApplication18
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i =0; i<countPlaces; i++)
+            int i = 0;
+            foreach (var car in parkingStages[currentLevel])
             {
-                var car = parkingStages[currentLevel][i];
-                if (car !=null)
-                {
-                    car.setPosition(5 + i / 5 * placeSizeWidth + 45, i % 5 * placeSizeHeight + 15);
-                    car.drawCar(g);
-                }
+                
+                car.setPosition(5 + i / 5 * placeSizeWidth + 45, i % 5 * placeSizeHeight + 15);
+                car.drawCar(g);
+                i++;
+                
             }
         }
         private void DrawMarking(Graphics g)
@@ -191,6 +191,10 @@ namespace WindowsFormsApplication18
                 }
             }
             return true;
+        }
+        public void Sort()
+        {
+            parkingStages.Sort();
         }
     }
 }

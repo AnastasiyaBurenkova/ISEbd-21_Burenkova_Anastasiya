@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication18
 {
-    public class Car : Vehicle
+    public class Car : Vehicle, IComparable<Car>, IEquatable<Car>
     {
         public override int MaxSpeed
         {
@@ -94,9 +94,6 @@ namespace WindowsFormsApplication18
             this.Weight = weight;
             this.countPassengers = 0;
             this.countСapacitys = 0;
-           // Random rand = new Random();
-           // startPosX = rand.Next(10, 200);
-          //  startPosY = rand.Next(10, 200);
         }
 
         public Car(string info)
@@ -169,6 +166,76 @@ namespace WindowsFormsApplication18
         public override string getInfo()
         {
             return MaxSpeed + ";"+MaxCountPassengers +";"+MaxCountСapacitys+";"+Weight+";"+ ColorBody.Name;
+        }
+        public int CompareTo(Car other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return MaxSpeed.CompareTo(other.MaxSpeed);
+            }
+            if (MaxCountPassengers != other.MaxCountPassengers)
+            {
+                return MaxCountPassengers.CompareTo(other.MaxCountPassengers);
+            }
+            if (MaxCountСapacitys != other.MaxCountСapacitys)
+            {
+                return MaxCountСapacitys.CompareTo(other.MaxCountСapacitys);
+            }
+            if (Weight != other.Weight)
+            {
+                return Weight.CompareTo(other.Weight);
+            }
+            if (ColorBody != other.ColorBody)
+            {
+                return ColorBody.Name.CompareTo(other.ColorBody.Name);
+            }
+            return 0;
+        }
+
+        public bool Equals(Car other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (MaxCountPassengers != other.MaxCountPassengers)
+            {
+                return false;
+            }
+            if (MaxCountСapacitys != other.MaxCountСapacitys)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (ColorBody != other.ColorBody)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Car warObj = obj as Car;
+            if (warObj == null) return false;
+            else return Equals(warObj);
+        }
+
+        public override int GetHashCode()
+        {
+            return MaxSpeed.GetHashCode();
         }
     }
 }
