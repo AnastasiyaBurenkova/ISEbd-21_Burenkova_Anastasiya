@@ -207,6 +207,10 @@ namespace WindowsFormsApplication18
             }
         }
 
-        
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            parking.Sort();
+            Draw();
+        }
     }
 }

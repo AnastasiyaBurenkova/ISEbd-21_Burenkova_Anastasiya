@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication18
 {
-    public class Gruzovik : Car
+    public class Gruzovik : Car, IComparable<Gruzovik>, IEquatable<Gruzovik>
     {
         private bool bamper;
         private bool kuzov;
@@ -97,6 +97,40 @@ namespace WindowsFormsApplication18
         {
             return MaxSpeed + ";" + MaxCountPassengers + ";" + MaxCountСapacitys + ";" + Weight + ";" + 
                 ColorBody.Name+";"+ bamper +";"+ kuzov +";"+ kolesa+";"+ dopColor.Name;
+        }
+        public int CompareTo(Gruzovik other)
+        {
+            var res = (this is Car).CompareTo(other is Car);
+            if (res != 0) return res;
+            if (bamper != other.bamper) return bamper.CompareTo(other.bamper);
+            if (kuzov != other.kuzov) return kuzov.CompareTo(other.kuzov);
+            if (kolesa != other.kolesa) return kolesa.CompareTo(other.kolesa);
+            if (dopColor != other.dopColor) return dopColor.Name.CompareTo(other.dopColor.Name);
+            return 0;
+        }
+
+        public bool Equals(Gruzovik other)
+        {
+            var res = (this is Car).Equals(other is Car);
+            if (!res) return res;
+            if (bamper != other.bamper) return false;
+            if (kuzov != other.kuzov) return false;
+            if (kolesa != other.kolesa) return false;
+            if (dopColor != other.dopColor) return false;
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Gruzovik carObj = obj as Gruzovik;
+            if (carObj == null) return false;
+            else return Equals(carObj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
