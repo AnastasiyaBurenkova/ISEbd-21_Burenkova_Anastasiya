@@ -44,11 +44,11 @@ public class Parking implements Serializable {
 			currentLevel--;
 	}
 
-	public int putPlaneInParking(ITransport plane) {
+	public int putPlaneInParking(ITransport plane) throws ParkingOverflowException {
 		return parking.get(currentLevel).plus(parking.get(currentLevel), plane);
 	}
 
-	public ITransport getPlaneInParking(int index) {
+	public ITransport getPlaneInParking(int index) throws ParkingIndexOutOfRangeException {
 		return parking.get(currentLevel).minus(parking.get(currentLevel), index);
 	}
 
@@ -86,7 +86,6 @@ public class Parking implements Serializable {
 			e.printStackTrace();
 		}
 		ObjectOutputStream obSave = new ObjectOutputStream(save);
-		System.out.println(parking.get(0).getPlane(0).getInfo());
 		obSave.writeObject(parking);
 
 		return true;
@@ -97,7 +96,6 @@ public class Parking implements Serializable {
 			ObjectInputStream obLoad = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
 			try {
 				parking = (ArrayList<ClassArray<ITransport>>)obLoad.readObject();
-				System.out.println(parking.get(0).getPlane(0).getInfo());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
