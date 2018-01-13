@@ -63,8 +63,6 @@ namespace WindowsFormsApplication16
                     return;
                 }
                 potato = new Potato[Convert.ToInt32(numericUpDownPotato.Value)];
-                //pan = new Pan();
-                //pan.Init(Convert.ToInt32(numericUpDownPotato.Value));
                 for (int i = 0; i < potato.Length; ++i)
                 {
                     potato[i] = new Potato();
@@ -74,7 +72,6 @@ namespace WindowsFormsApplication16
                     potato[i].Dirty_potato = 0;
                 }
                 numericUpDownPotato.Enabled = false;
-                //radioButtonClose.Checked = true;
                 MessageBox.Show("Картошку помыли, можно чистить", "Кухня", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -91,15 +88,6 @@ namespace WindowsFormsApplication16
                 waterTap.State = true;
             }
         }
-
-       // private void radioButtonClose_CheckedChanged_1(object sender, EventArgs e)
-      //  {
-        //    if (radioButtonClose.Checked)
-         //   {
-           //     waterTap.State = false;
-          //  }
-       // }
-
         private void buttonWash2_Click_1(object sender, EventArgs e)
         {
             if (numericUpDownPerez.Value > 0)
@@ -110,7 +98,6 @@ namespace WindowsFormsApplication16
                     return;
                 }
                 perez = new Perez[Convert.ToInt32(numericUpDownPerez.Value)];
-              //  pan.Init(Convert.ToInt32(numericUpDownPerez.Value));
                 for (int i = 0; i < perez.Length; ++i)
                 {
                     perez[i] = new Perez();
@@ -120,7 +107,6 @@ namespace WindowsFormsApplication16
                     perez[i].Dirty_perez = 0;
                 }
                 numericUpDownPerez.Enabled = false;
-                //radioButtonClose.Checked = true;
                 MessageBox.Show("Перец помыли, можно чистить", "Кухня", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -139,7 +125,6 @@ namespace WindowsFormsApplication16
                     return;
                 }
                 kabach = new Kabach[Convert.ToInt32(numericUpDownKabach.Value)];
-              //  pan.Init(Convert.ToInt32(numericUpDownKabach.Value));
                 for (int i = 0; i < kabach.Length; ++i)
                 {
                     kabach[i] = new Kabach();
@@ -149,7 +134,6 @@ namespace WindowsFormsApplication16
                     kabach[i].Dirty_kabach = 0;
                 }
                 numericUpDownKabach.Enabled = false;
-               // radioButtonClose.Checked = true;
                 MessageBox.Show("Кабачок помыли, можно чистить", "Кухня", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -248,7 +232,6 @@ namespace WindowsFormsApplication16
         private void buttonAddMaslo_Click_1(object sender, EventArgs e)
         {
             buttonAddPriprava.Enabled = true;
-           // radioButtonClose.Checked = true;
             MessageBox.Show("Масло залили", "Кухня", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -390,7 +373,6 @@ namespace WindowsFormsApplication16
             stove.Cook();
             if (stove.Pan.IsReady())
             {
-                //buttonGetPan.Enabled = true;
                 checkBoxOn.Checked = false;
                 MessageBox.Show("Сварилась!", "Кухня", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
